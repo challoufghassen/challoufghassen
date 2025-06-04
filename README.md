@@ -1,373 +1,617 @@
-&lt;!DOCTYPE html&lt;1>>
-
-&lt;html lang="en" class="scroll-smooth">
-&lt;head>
-&lt;meta charset="UTF-8">
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
-&lt;title>Challouf Ghassen | Cybersecurity Portfolio&lt;/title>
-&lt;script src="https://cdn.tailwindcss.com">&lt;/script>
-&lt;script src="https://cdn.jsdelivr.net/npm/chart.js">&lt;/script>
-&lt;2><link rel="preconnect" href="https://fonts.googleapis.com">
-&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
-&lt;style>
-body {
-font-family: 'Inter', sans-serif;
-}
-.chart-container {
-position: relative;
-width: 100%;
-max-width: 500px;
-margin-left: auto;
-margin-right: auto;
-height: 300px;
-max-height: 40vh;
-}
-@media (min-width: 768px) {
-.chart-container {
-height: 400px;
-}
-}
-.modal-backdrop {
-transition: opacity 0.3s ease-in-out;
-}
-.modal-content {
-transition: transform 0.3s ease-in-out;
-}
-.nav-link::after {
-content: '';
-display: block;
-width: 0;
-height: 2px;
-background: #4fd1c5;
-transition: width .3s;
-}
-.nav-link:hover::after {
-width: 100%;
-}
-.active-link::after {
-width: 100%;
-}
-&lt;/style>
-&lt;!-- Chosen Palette: Cyber Neutral (Dark theme with teal/green accents) -->
-&lt;!-- Application Structure Plan: A dashboard-style, single-page portfolio with a top navigation bar for smooth scrolling to thematic sections (About, Skills, Projects, Certifications). This structure prioritizes quick access for users like recruiters. Key interactions include an interactive skills radar chart for a high-impact visual summary and clickable project cards that open detailed modals, allowing users to explore content without leaving the main view. This non-linear, interactive approach is more engaging and user-friendly than a traditional linear CV. -->
-&lt;!-- Visualization & Content Choices:
-- Profile/About: Goal: Inform. Method: Formatted text blocks. Interaction: None. Justification: Provides a clear, concise professional summary upfront.
-- Skills Overview: Goal: Compare/Inform. Method: Radar Chart (Chart.js/Canvas). Interaction: Hover tooltips for details. Justification: Offers a dynamic and visually compelling summary of skill distribution, turning a simple list into an engaging data point.
-- Detailed Skills: Goal: Organize. Method: Tabbed HTML/CSS/JS interface. Interaction: Click to switch categories. Justification: Neatly organizes a large amount of information, preventing cognitive overload and improving scannability.
-- Projects: Goal: Organize/Inform. Method: Card layout with JS-powered modals. Interaction: Click cards for details. Justification: Maintains a clean page layout while providing depth on demand for interested users.
-- Certifications: Goal: Inform. Method: Styled list. Interaction: None. Justification: Clearly and professionally presents credentials.
--->
-&lt;!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-&lt;/head>
-&lt;body class="bg-gray-900 text-gray-300 antialiased">
-
-<header id="header" class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#hero" class="text-xl font-bold text-white">Ghassen Challouf</a>
-        <div class="hidden md:flex space-x-8">
-            <a href="#about" class="nav-link text-gray-300 hover:text-teal-400 transition-colors duration-300">About</a>
-            <a href="#skills" class="nav-link text-gray-300 hover:text-teal-400 transition-colors duration-300">Skills</a>
-            <a href="#projects" class="nav-link text-gray-300 hover:text-teal-400 transition-colors duration-300">Projects</a>
-            <a href="#certs" class="nav-link text-gray-300 hover:text-teal-400 transition-colors duration-300">Certifications</a>
-        </div>
-        <button id="mobile-menu-button" class="md:hidden text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-        </button>
-    </nav>
-    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-        <a href="#about" class="block py-2 text-gray-300 hover:text-teal-400">About</a>
-        <a href="#skills" class="block py-2 text-gray-300 hover:text-teal-400">Skills</a>
-        <a href="#projects" class="block py-2 text-gray-300 hover:text-teal-400">Projects</a>
-        <a href="#certs" class="block py-2 text-gray-300 hover:text-teal-400">Certifications</a>
-    </div>
-</header>
-
-<main class="container mx-auto px-6">
-
-    <section id="hero" class="min-h-screen flex items-center justify-center text-center">
-        <div class="max-w-4xl">
-            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-4">Cybersecurity Engineering Student & <span class="text-teal-400">Aspiring Penetration Tester</span></h1>
-            <p class="text-lg md:text-xl text-gray-400 mb-8">Passionate about offensive security and vulnerability analysis, driven to build and defend secure digital environments.</p>
-            <div class="flex justify-center items-center space-x-4">
-                 <a href="[https://www.linkedin.com/in/ghassen-challouf/](https://www.linkedin.com/in/ghassen-challouf/)" target="_blank" class="text-white hover:text-teal-400 transition-colors duration-300 text-2xl font-bold">LinkedIn</a>
-                 <a href="[https://tryhackme.com/p/Ghassencha](https://tryhackme.com/p/Ghassencha)" target="_blank" class="text-white hover:text-teal-400 transition-colors duration-300 text-2xl font-bold">TryHackMe</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-20">
-        <h2 class="text-4xl font-bold text-white text-center mb-12">About Me</h2>
-        <div class="grid md:grid-cols-5 gap-8 items-start">
-            <div class="md:col-span-3 bg-gray-800 p-8 rounded-lg shadow-2xl">
-                <p class="text-lg mb-6">I am a second-year engineering student at TEK-UP, specializing in Cybersecurity. I am passionate about offensive security and vulnerability analysis, actively seeking an internship in penetration testing to apply and expand my technical skills in a dynamic professional environment.</p>
-                <p class="text-lg">I am a motivated, organized, and responsible individual, always eager to learn new technical skills and deepen my acquired knowledge. I enjoy teamwork and am driven to contribute effectively to group projects.</p>
-            </div>
-            <div class="md:col-span-2 space-y-6">
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="font-bold text-white text-xl mb-3">🔭 Currently Focused On</h3>
-                    <ul class="list-disc list-inside text-gray-400 space-y-2">
-                        <li>Honing skills in Penetration Testing Methodologies</li>
-                        <li>Analyzing malware like the Zus Trojan</li>
-                        <li>Contributing to CTF designs for events</li>
-                    </ul>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="font-bold text-white text-xl mb-3">🌱 Actively Learning</h3>
-                    <ul class="list-disc list-inside text-gray-400 space-y-2">
-                        <li>Advanced Exploitation Techniques</li>
-                        <li>Digital Forensics & Threat Hunting</li>
-                        <li>Preparing for eJPT Certification</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="py-20">
-        <h2 class="text-4xl font-bold text-white text-center mb-4">My Arsenal</h2>
-        <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">Here is a visual overview of my core competency areas. This chart highlights the domains where I focus my learning and practice. Below, you'll find a more detailed breakdown of the specific tools and technologies I use.</p>
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                 <div class="chart-container">
-                    <canvas id="skillsChart"></canvas>
-                </div>
-            </div>
-            <div>
-                <div id="skill-tabs">
-                    <div class="border-b border-gray-700 mb-4">
-                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                            <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-teal-500 text-teal-400" data-target="tools">Tools</button>
-                            <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-300 hover:border-gray-400" data-target="concepts">Concepts</button>
-                            <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-300 hover:border-gray-400" data-target="os">Systems</button>
-                        </nav>
-                    </div>
-                    <div id="tools" class="tab-content grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        <span class="bg-gray-800 p-3 rounded text-center">Metasploit</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Wireshark</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Burp Suite</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Ghidra</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">OWASP</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">ELK Stack</span>
-                    </div>
-                    <div id="concepts" class="tab-content hidden grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        <span class="bg-gray-800 p-3 rounded text-center">Penetration Testing</span>
-                         <span class="bg-gray-800 p-3 rounded text-center">Network Security</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Digital Forensics</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">OSINT</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Threat Hunting</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Host Auditing</span>
-                    </div>
-                    <div id="os" class="tab-content hidden grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        <span class="bg-gray-800 p-3 rounded text-center">Linux</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Debian</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">RHEL</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Ubuntu</span>
-                        <span class="bg-gray-800 p-3 rounded text-center">Windows</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-20">
-         <h2 class="text-4xl font-bold text-white text-center mb-4">Field Work</h2>
-         <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">Theory is essential, but application is where knowledge is forged. This section showcases some of the key projects where I've applied my skills to solve real-world problems. Click on any project to learn more about the objectives, process, and outcomes.</p>
-        <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        </div>
-    </section>
-
-    <section id="certs" class="py-20">
-        <h2 class="text-4xl font-bold text-white text-center mb-12">Certifications</h2>
-         <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">Formal certifications validate the skills and knowledge acquired through study and hands-on practice. Here are the credentials I have earned to date, demonstrating my proficiency in key areas of cybersecurity.</p>
-        <div class="max-w-4xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
-            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
-                <h3 class="text-xl font-bold text-white">Junior Penetration Tester</h3>
-                <p class="text-teal-400">INE Security</p>
-            </div>
-            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
-                <h3 class="text-xl font-bold text-white">Web Penetration Tester</h3>
-                <p class="text-teal-400">INE Security</p>
-            </div>
-            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
-                <h3 class="text-xl font-bold text-white">Blue Team Junior Analyst</h3>
-                <p class="text-teal-400">Security Blue Team</p>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<footer class="bg-gray-800 py-8">
-    <div class="container mx-auto px-6 text-center text-gray-400">
-        <p>&copy; 2024 Challouf Ghassen. All rights reserved.</p>
-        <p>Built with determination and a little bit of caffeine.</p>
-    </div>
-</footer>
-
-<div id="project-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 opacity-0 pointer-events-none">
-    <div class="modal-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
-        <div class="sticky top-0 bg-gray-800 p-4 border-b border-gray-700 flex justify-between items-center">
-            <h3 id="modal-title" class="text-2xl font-bold text-white"></h3>
-            <button id="modal-close" class="text-gray-400 hover:text-white">&times;</button>
-        </div>
-        <div class="p-6">
-            <p id="modal-description" class="text-gray-300 mb-6"></p>
-            <h4 class="font-bold text-white mb-2">Tools Used:</h4>
-            <div id="modal-tools" class="flex flex-wrap gap-2"></div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        const navLinks = document.querySelectorAll('#header a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (!mobileMenu.classList.contains('hidden')) {
-                     mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-
-        const sections = document.querySelectorAll('section');
-        const headerNavLinks = document.querySelectorAll('#header .hidden a');
-        window.onscroll = () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-            headerNavLinks.forEach(link => {
-                link.classList.remove('active-link', 'text-teal-400');
-                if (link.href.includes(current)) {
-                    link.classList.add('active-link', 'text-teal-400');
-                }
-            });
-        };
-
-        const ctx = document.getElementById('skillsChart').getContext('2d');
-        const skillsChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['Offensive Security', 'Defensive Security', 'Network Analysis', 'Malware Analysis', 'Forensics', 'Vulnerability Assessment'],
-                datasets: [{
-                    label: 'Focus Area',
-                    data: [9, 6, 7, 8, 7, 9],
-                    backgroundColor: 'rgba(79, 209, 197, 0.2)',
-                    borderColor: 'rgba(79, 209, 197, 1)',
-                    pointBackgroundColor: 'rgba(79, 209, 197, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(79, 209, 197, 1)'
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
-                        grid: { color: 'rgba(255, 255, 255, 0.2)' },
-                        pointLabels: { color: '#a0aec0', font: { size: 14 } },
-                        ticks: {
-                            color: '#1a202c',
-                            backdropColor: 'rgba(255, 255, 255, 0.8)',
-                            stepSize: 2
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-
-        const tabs = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = document.getElementById(tab.dataset.target);
-                tabContents.forEach(tc => tc.classList.add('hidden'));
-                target.classList.remove('hidden');
-
-                tabs.forEach(t => t.classList.remove('border-teal-500', 'text-teal-400'));
-                tab.classList.add('border-teal-500', 'text-teal-400');
-            });
-        });
-
-        const projectsData = [
-            {
-                title: "Zus Trojan Malware Analysis",
-                description: "Conducted an in-depth analysis of the Zus Trojan, a complex banking malware. The primary goal was to understand its propagation methods, evasion techniques, and data exfiltration capabilities. Based on the findings, I developed custom detection rules and outlined effective defense strategies to mitigate the risk of financial fraud.",
-                tools: ["Ghidra", "Wireshark", "Docker"]
-            },
-            {
-                title: "Secure Facial Recognition System",
-                description: "Designed and deployed a secure facial recognition surveillance system. This project had a strong focus on data privacy, ensuring strict compliance with GDPR and other data protection standards throughout the system's architecture and operational lifecycle.",
-                tools: ["Python", "OpenCV", "Linux"]
-            },
-            {
-                title: "eJPT Certification Training Lead",
-                description: "Organized and led a hands-on cybersecurity training program to support fellow students in preparing for and achieving the eJPT certification. The curriculum covered foundational penetration testing, network scanning with Nmap, and various exploitation techniques using Metasploit.",
-                tools: ["Metasploit", "Nmap", "CTF Design"]
-            },
-            {
-                title: "Securinets CTF Contributor",
-                description: "As a technical team member for Securinets at TEK-UP, I was responsible for creating and testing Capture The Flag (CTF) challenges for various events. This involved developing vulnerable web applications, network challenges, and cryptographic puzzles to test participants' skills.",
-                tools: ["CTF Design", "Web Security", "Scripting"]
-            }
-        ];
-
-        const projectGrid = document.getElementById('project-grid');
-        const modal = document.getElementById('project-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDescription = document.getElementById('modal-description');
-        const modalTools = document.getElementById('modal-tools');
-        const modalClose = document.getElementById('modal-close');
-
-        projectsData.forEach(project => {
-            const card = document.createElement('div');
-            card.className = 'bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transform hover:-translate-y-2 transition-transform duration-300';
-            card.innerHTML = `<div class="p-6"><h3 class="text-xl font-bold text-white mb-2">${project.title}</h3><p class="text-gray-400">${project.description.substring(0, 100)}...</p></div>`;
-            card.addEventListener('click', () => openModal(project));
-            projectGrid.appendChild(card);
-        });
-
-        function openModal(project) {
-            modalTitle.textContent = project.title;
-            modalDescription.textContent = project.description;
-            modalTools.innerHTML = project.tools.map(tool => `<span class="bg-gray-700 text-teal-300 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">${tool}</span>`).join('');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.querySelector('.modal-content').classList.remove('scale-95');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghassen Challouf | Cybersecurity Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e7eb;
         }
         
-        function closeModal() {
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.querySelector('.modal-content').classList.add('scale-95');
+        .code-font {
+            font-family: 'Fira Code', monospace;
         }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #4fd1c5, #38b2ac, #319795);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .skill-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(79, 209, 197, 0.3);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-left: 3px solid #4fd1c5;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4fd1c5;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-white">
+                    <span class="gradient-text">GhassenC</span>
+                </a>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about" class="nav-link text-gray-300 hover:text-teal-400">About</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-teal-400">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-teal-400">Projects</a>
+                    <a href="#experience" class="nav-link text-gray-300 hover:text-teal-400">Experience</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-teal-400">Contact</a>
+                </nav>
+                
+                <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2 pb-2">
+                <a href="#about" class="block py-2 text-gray-300 hover:text-teal-400">About</a>
+                <a href="#skills" class="block py-2 text-gray-300 hover:text-teal-400">Skills</a>
+                <a href="#projects" class="block py-2 text-gray-300 hover:text-teal-400">Projects</a>
+                <a href="#experience" class="block py-2 text-gray-300 hover:text-teal-400">Experience</a>
+                <a href="#contact" class="block py-2 text-gray-300 hover:text-teal-400">Contact</a>
+            </div>
+        </div>
+    </header>
 
-        modalClose.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center py-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    <span class="gradient-text">Cybersecurity Engineer</span> &<br>
+                    Penetration Tester
+                </h1>
+                
+                <p class="text-xl text-gray-400 mb-8">
+                    I identify vulnerabilities, secure systems, and help organizations defend against cyber threats.
+                </p>
+                
+                <div class="flex justify-center space-x-4">
+                    <a href="https://www.linkedin.com/in/ghassen-challouf/" target="_blank" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        Connect on LinkedIn
+                    </a>
+                    <a href="#projects" class="border border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-gray-900 px-6 py-3 rounded-lg font-medium transition-colors">
+                        View My Work
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="https://tryhackme.com/p/Ghassencha" target="_blank" class="text-gray-400 hover:text-teal-400 text-xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </a>
+                    <a href="https://github.com/ghassencha" target="_blank" class="text-gray-400 hover:text-teal-400 text-xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-teal-400 text-xl">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800/50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-teal-400 shadow-lg">
+                            <img src="https://via.placeholder.com/256" alt="Ghassen Challouf" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 bg-gray-900 px-4 py-2 rounded-full border border-teal-400 shadow-lg">
+                            <span class="text-teal-400 font-bold">Security Engineer</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-3xl font-bold text-white mb-6">
+                        <span class="border-b-2 border-teal-400 pb-2">About Me</span>
+                    </h2>
+                    
+                    <p class="text-gray-400 mb-6 text-lg">
+                        I'm a second-year Cybersecurity Engineering student at TEK-UP with a passion for offensive security and vulnerability research. My journey in cybersecurity began with a curiosity about how systems can be compromised and how to defend them.
+                    </p>
+                    
+                    <p class="text-gray-400 mb-8 text-lg">
+                        Currently focused on preparing for the eJPT certification while contributing to security research projects. I enjoy participating in CTF competitions and analyzing real-world malware samples to understand attacker techniques.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-gray-900 p-4 rounded-lg border-l-4 border-teal-400">
+                            <h3 class="font-bold text-white mb-2"><i class="fas fa-bullseye text-teal-400 mr-2"></i> Focus Areas</h3>
+                            <ul class="text-gray-400">
+                                <li class="mb-1">• Penetration Testing</li>
+                                <li class="mb-1">• Malware Analysis</li>
+                                <li>• Vulnerability Research</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-4 rounded-lg border-l-4 border-teal-400">
+                            <h3 class="font-bold text-white mb-2"><i class="fas fa-graduation-cap text-teal-400 mr-2"></i> Education</h3>
+                            <p class="text-gray-400 mb-1">Cybersecurity Engineering</p>
+                            <p class="text-teal-400 text-sm">TEK-UP University</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    <span class="border-b-2 border-teal-400 pb-2">Technical Skills</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    My skill set spans across offensive and defensive security domains, with hands-on experience in various tools and technologies.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <canvas id="skillsChart" height="400"></canvas>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Core Competencies</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="text-teal-400 mb-2">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-2">Offensive Security</h4>
+                            <p class="text-gray-400 text-sm">
+                                Penetration testing, vulnerability assessment, and exploitation techniques.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="text-teal-400 mb-2">
+                                <i class="fas fa-search text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-2">Malware Analysis</h4>
+                            <p class="text-gray-400 text-sm">
+                                Static and dynamic analysis of malicious software samples.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="text-teal-400 mb-2">
+                                <i class="fas fa-network-wired text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-2">Network Security</h4>
+                            <p class="text-gray-400 text-sm">
+                                Traffic analysis, intrusion detection, and secure architecture design.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <div class="text-teal-400 mb-2">
+                                <i class="fas fa-laptop-code text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-2">Secure Coding</h4>
+                            <p class="text-gray-400 text-sm">
+                                Developing applications with security best practices in mind.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold text-white mb-6">Tools & Technologies</h3>
+                
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Metasploit</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Burp Suite</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Wireshark</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Ghidra</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Nmap</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Python</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Kali Linux</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Docker</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">OWASP ZAP</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">ELK Stack</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Git</span>
+                    <span class="skill-badge bg-gray-800 text-teal-400 px-4 py-2 rounded-full">Bash</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-800/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    <span class="border-b-2 border-teal-400 pb-2">Featured Projects</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Hands-on security projects demonstrating my technical skills and problem-solving approach.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-teal-400/10 p-3 rounded-full mr-4">
+                                <i class="fas fa-bug text-teal-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Zus Trojan Analysis</h3>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                            In-depth analysis of banking malware including behavior, evasion techniques, and detection rules.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">Ghidra</span>
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">Wireshark</span>
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">YARA</span>
+                        </div>
+                        <a href="#" class="text-teal-400 hover:text-teal-300 font-medium inline-flex items-center">
+                            Read Case Study <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-teal-400/10 p-3 rounded-full mr-4">
+                                <i class="fas fa-lock text-teal-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Secure Facial Recognition</h3>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                            Privacy-focused facial recognition system with GDPR compliance and secure data handling.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">OpenCV</span>
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">Docker</span>
+                        </div>
+                        <a href="#" class="text-teal-400 hover:text-teal-300 font-medium inline-flex items-center">
+                            View Details <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-teal-400/10 p-3 rounded-full mr-4">
+                                <i class="fas fa-user-graduate text-teal-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">eJPT Training Program</h3>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                            Developed and led a training curriculum to prepare students for eJPT certification.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">Metasploit</span>
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">Nmap</span>
+                            <span class="bg-gray-800 text-teal-400 text-xs px-3 py-1 rounded-full">CTF</span>
+                        </div>
+                        <a href="#" class="text-teal-400 hover:text-teal-300 font-medium inline-flex items-center">
+                            See Curriculum <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://github.com/ghassencha" target="_blank" class="inline-flex items-center px-6 py-3 border border-teal-400 text-teal-400 rounded-lg hover:bg-teal-400 hover:text-gray-900 transition-colors">
+                    <i class="fab fa-github mr-2"></i> View All Projects on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    <span class="border-b-2 border-teal-400 pb-2">Certifications & Experience</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    My professional credentials and hands-on security experience.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Certifications -->
+                <div class="mb-12">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-certificate text-teal-400 mr-3"></i> Certifications
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-teal-400">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <h4 class="text-lg font-bold text-white">eJPT (Junior Penetration Tester)</h4>
+                                <span class="text-teal-400 text-sm mt-1 sm:mt-0">INE Security | 2023</span>
+                            </div>
+                            <p class="text-gray-400 mt-2">
+                                Certified in foundational penetration testing skills including network scanning, vulnerability assessment, and exploitation.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-teal-400">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <h4 class="text-lg font-bold text-white">Blue Team Junior Analyst</h4>
+                                <span class="text-teal-400 text-sm mt-1 sm:mt-0">Security Blue Team | 2023</span>
+                            </div>
+                            <p class="text-gray-400 mt-2">
+                                Certified in basic digital forensics, SIEM monitoring, and incident response techniques.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-briefcase text-teal-400 mr-3"></i> Experience
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-teal-400">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <h4 class="text-lg font-bold text-white">Securinets TEK-UP</h4>
+                                <span class="text-teal-400 text-sm mt-1 sm:mt-0">CTF Challenge Developer | 2023-Present</span>
+                            </div>
+                            <p class="text-gray-400 mt-2">
+                                Designed and tested Capture The Flag challenges for cybersecurity events, focusing on web security and network exploitation scenarios.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-teal-400">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <h4 class="text-lg font-bold text-white">eJPT Training Lead</h4>
+                                <span class="text-teal-400 text-sm mt-1 sm:mt-0">TEK-UP University | 2023</span>
+                            </div>
+                            <p class="text-gray-400 mt-2">
+                                Organized and led training sessions to prepare students for the eJPT certification, covering penetration testing fundamentals and tools.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-800/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    <span class="border-b-2 border-teal-400 pb-2">Get In Touch</span>
+                </h2>
+                <p class="text-gray-400 mb-8">
+                    Interested in discussing security research, collaboration opportunities, or potential internships? Feel free to reach out.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://www.linkedin.com/in/ghassen-challouf/" target="_blank" class="text-gray-400 hover:text-teal-400 text-2xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/ghassencha" target="_blank" class="text-gray-400 hover:text-teal-400 text-2xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:your.email@example.com" class="text-gray-400 hover:text-teal-400 text-2xl">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+                
+                <a href="#" class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fas fa-file-download mr-2"></i> Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">
+                &copy; 2024 Ghassen Challouf. All rights reserved.
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                Built with <i class="fas fa-heart text-red-400"></i> and <i class="fas fa-coffee text-amber-500"></i>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileLinks = document.querySelectorAll('#mobile-menu a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Active navigation highlighting
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header nav a');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav', 'text-teal-400');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active-nav', 'text-teal-400');
+                    }
+                });
+            });
+            
+            // Skills Radar Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Penetration Testing',
+                        'Malware Analysis',
+                        'Network Security',
+                        'Vulnerability Research',
+                        'Digital Forensics',
+                        'Secure Coding'
+                    ],
+                    datasets: [{
+                        label: 'Skill Level',
+                        data: [85, 75, 80, 85, 70, 65],
+                        backgroundColor: 'rgba(79, 209, 197, 0.2)',
+                        borderColor: 'rgba(79, 209, 197, 1)',
+                        pointBackgroundColor: 'rgba(79, 209, 197, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(79, 209, 197, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#e5e7eb',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(0, 0, 0, 0)',
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                stepSize: 20,
+                                showLabelBackdrop: false
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    elements: {
+                        line: {
+                            tension: 0.1
+                        }
+                    }
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-    });
-</script>
+    </script>
+</body>
+</html>
